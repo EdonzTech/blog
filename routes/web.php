@@ -1,7 +1,8 @@
 <?php
 
-use App\Livewire\EditPost;
+use App\Livewire\EditPostModal;
 use App\Livewire\Post as LivewirePost;
+use App\Livewire\ShowPost;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/post', LivewirePost::class)->name('post');
-Route::get('/edit/{post}', EditPost::class)->name('edit');
+Route::get('/show/{post}', ShowPost::class)->name('show');
+
 
 

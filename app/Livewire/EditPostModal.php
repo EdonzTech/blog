@@ -6,21 +6,24 @@ use App\Models\Post;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class EditPost extends Component
+class EditPostModal extends Component
 {
+
     public $post;
     public $title;
     public $body;
     public $image;
 
     use WithFileUploads;
-    
-    public function mount($post)
+
+    public function mount (Post $post)
     {
-        $this->post = Post::findOrFail($post);
+        $this->title = $post->title;
+        $this->body = $post->body;  
+        $this->image = $post->image;
     }
 
-    public function update( Post $post)
+    public function update (Post $post)
     {
         // Validation
         $this->validate([
@@ -40,27 +43,12 @@ class EditPost extends Component
             'body' => $this->body,
         ]);
      
-        session()->flash('success', 'Post created successfully.');
+        session()->flash('success', 'Post updated successfully.');
         $this->dispatch('close-modal');
-
-    }
-
-    public function destory(Post $post) 
-    {
-        $imagePath = public_path('storage/'. $post->image);
-
-        if(file_exists($imagePath)) {
-            unlink($imagePath);
-        }
-        $post->delete();
-        session()->flash('success', 'Post deleted successfully.');
-        return redirect('/');
     }
 
     public function render()
     {
-        return view('livewire.edit-post',  [
-            'post' => $this->post,
-        ]);
+        return view('livewire.edit-post-modal');
     }
 }

@@ -9,7 +9,7 @@
         <div class="overflow-x-scroll">
             <div class="flex space-x-4 py-10 ">
                 @foreach($posts as $post)
-                    <div class="flex-shrink-0 max-w-sm  bg-white border border-gray-200 rounded-lg shadow ">
+                    <div wire:key="{{ $post->id }}"  class="flex-shrink-0 max-w-sm  bg-white border border-gray-200 rounded-lg shadow ">
                         <a href="#" class="max-h-44">
                             <img class="rounded-t-lg" src="{{ asset($post->image) }}" alt="" />
                         </a>
@@ -23,7 +23,7 @@
 
                             <p class=" font-normal text-gray-700 h-48 overflow-hidden">{{ $post->body }}.</p>
                             <div class="mt-8">
-                                <a href="{{ route('edit', $post->id) }}" class="bg-red-500 py-3 px-5 rounded-lg text-white hover:bg-red-200 hover:text-gray-500 mt-1">Read More</a>
+                                <a href="{{ route('show', $post->id) }}" class="bg-red-500 py-3 px-5 rounded-lg text-white hover:bg-red-200 hover:text-gray-500 mt-1">Read More</a>
                             </div>
                         </div>
                     </div>
